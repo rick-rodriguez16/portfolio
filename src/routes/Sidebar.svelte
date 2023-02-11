@@ -1,39 +1,36 @@
 <script lang="ts">
     import { LightSwitch } from '@skeletonlabs/skeleton';
-    import Sidebar from './Sidebar.svelte';
-	import Hamburger from './Hamburger.svelte';
-	let open = false;
+	export let open: boolean;
 </script>
 
-<Sidebar bind:open />
-<div class="sticky top-0 z-10 px-6 py-1 text-xl backdrop-blur-md">
-	<div class="container mx-auto flex w-full justify-between items-center py-1">
-        <h3 class="text-primary-500 -mt-1 p-2 md:p-none">
-            <span class="text-primary-500">{'<'}rickrodriguez<span>.dev</span>{' />'}</span>
-        </h3>
-		<nav
-			class="list-nav group hidden md:flex"
-		>
-			<ul class="flex items-end">
-                <li>
-                    <a class="rounded px-2 duration-300 hover:!opacity-100 group-hover:opacity-50" href="/"
-                        >Home</a
-                    >
-                </li>
-                <li>
-                    <a class="rounded px-2 duration-300 hover:!opacity-100 group-hover:opacity-50" href="/about"
-                        >About</a
-                    >
-                </li>
-                <li>
-                    <a class="rounded px-2 duration-300 hover:!opacity-100 group-hover:opacity-50" href="/blog"
-                        >Blog</a
-                    >
-                </li>
-            </ul>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+	on:click={() => (open = false)}
+	class="absolute z-10 min-h-full min-w-full bg-black/25 backdrop-blur-sm transition-all duration-300 {open
+		? 'z-10'
+		: '-z-10 opacity-0'}"
+/>
+<div
+	class="fixed right-0 z-20 h-full w-2/3 bg-surface-50-900-token p-2 transition-all duration-500 md:hidden {open
+		? ''
+		: 'translate-x-full'}"
+>
+	<div class="flex h-full w-full flex-col justify-around py-10">
+		<nav class="list-nav flex group">
+			<ul>
+				<li>
+					<a class="" href="/">Home</a>
+				</li>
+				<li>
+					<a class="" href="/about">About</a>
+				</li>
+				<li>
+					<a class="" href="/blog">Blog</a>
+				</li>
+			</ul>
 		</nav>
-		<div class="hidden gap-3 md:flex">
-            <div class="md:block hidden">
+        <div class="gap-3 flex">
+            <div class="flex-grow">
                 <LightSwitch />
             </div>
 			<a target="_blank" rel="noreferrer" href="https://twitter.com">
@@ -61,4 +58,3 @@
 		</div>
 	</div>
 </div>
-<Hamburger bind:open />
